@@ -50,8 +50,9 @@ import logging
 
 from rich.logging import RichHandler
 
+
 logger = logging.getLogger("soyut_logger")
-logger.setLevel(os.environ.get('LOGLEVEL','info').upper())
+logger.setLevel(os.environ.get("LOGLEVEL", "info").upper())
 
 stream_handler = RichHandler()
 logger.addHandler(stream_handler)
