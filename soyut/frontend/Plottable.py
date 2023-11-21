@@ -58,7 +58,7 @@ class APlottable(metaclass=ABCMeta):
         self.kwargs = kwargs
 
     @abstractmethod
-    def _make_mline(self, axe: ABaxe) -> T.T.Tuple[FloatArr, FloatArr, str, str, str, str]:
+    def _make_mline(self, axe: ABaxe) -> T.Tuple[FloatArr, FloatArr, str, str, str, str]:
         """This makes the job of turning a generic plottable into a tuple of useful values
 
         Returns:
@@ -73,7 +73,7 @@ class APlottable(metaclass=ABCMeta):
         pass
 
     @abstractproperty
-    def compatible_baxe(self) -> T.T.List[AxeProjection]:
+    def compatible_baxe(self) -> T.List[AxeProjection]:
         pass
 
 
@@ -91,6 +91,7 @@ class PlottableGraph(APlottable):
 
     __slots__ = []
 
+    @property
     def compatible_baxe(self) -> T.List[AxeProjection]:
         return [AxeProjection.GRAPH]
 
@@ -99,6 +100,7 @@ class PlottableGeneric(APlottable):
 
     __slots__ = []
 
+    @property
     def compatible_baxe(self) -> T.List[AxeProjection]:
         return [
             AxeProjection.RECTILINEAR,
@@ -154,6 +156,7 @@ class PlottableImage(APlottableDSPMap):
 
     __slots__ = []
 
+    @property
     def compatible_baxe(self) -> T.List[AxeProjection]:
         return [
             AxeProjection.RECTILINEAR,

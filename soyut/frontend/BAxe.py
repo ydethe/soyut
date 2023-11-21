@@ -195,6 +195,7 @@ class BAxeGraph(ABaxe):
 
     __slots__ = []
 
+    @property
     def projection(self) -> AxeProjection:
         return AxeProjection.GRAPH
 
@@ -203,6 +204,7 @@ class BAxeRectilinear(ABaxe):
 
     __slots__ = []
 
+    @property
     def projection(self) -> AxeProjection:
         return AxeProjection.RECTILINEAR
 
@@ -219,6 +221,7 @@ class BAxeSemiLogY(BAxeRectilinear):
 
     __slots__ = []
 
+    @property
     def projection(self) -> AxeProjection:
         return AxeProjection.LOGY
 
@@ -227,6 +230,7 @@ class BAxeSemiLogXY(BAxeRectilinear):
 
     __slots__ = []
 
+    @property
     def projection(self) -> AxeProjection:
         return AxeProjection.LOGXY
 
@@ -235,6 +239,7 @@ class BAxePolar(ABaxe):
 
     __slots__ = []
 
+    @property
     def projection(self) -> AxeProjection:
         return AxeProjection.POLAR
 
@@ -243,6 +248,7 @@ class BAxeNorthPolar(ABaxe):
 
     __slots__ = []
 
+    @property
     def projection(self) -> AxeProjection:
         return AxeProjection.NORTH_POLAR
 
@@ -251,6 +257,7 @@ class BAxePlateCarree(ABaxe):
 
     __slots__ = []
 
+    @property
     def projection(self) -> AxeProjection:
         return AxeProjection.PLATECARREE
 
@@ -294,6 +301,7 @@ class BAxeDim3D(ABaxe):
 
     __slots__ = []
 
+    @property
     def projection(self) -> AxeProjection:
         return AxeProjection.DIM3D
 
@@ -302,6 +310,7 @@ class BAxePanda3D(ABaxe):
 
     __slots__ = []
 
+    @property
     def projection(self) -> AxeProjection:
         return AxeProjection.PANDA3D
 

@@ -5,6 +5,8 @@ from .BLayout import BGridSpec, BGridElement
 from .GraphicSpec import AxeProjection
 from .BAxe import ABaxe, BAxeFactory
 
+__all__ = ["BFigure"]
+
 
 class BFigure(object):
     def __init__(self, title: str) -> None:
