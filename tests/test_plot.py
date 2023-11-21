@@ -82,10 +82,13 @@ def simple_plotly_renderer(fig: BFigure) -> go.Figure:
     from plotly.subplots import make_subplots
 
     specs = gridspec_to_plotly_specs(fig.grid_spec)
-    pfig = make_subplots(rows=fig.grid_spec.nrows, cols=fig.grid_spec.ncols, specs=specs)
+    axes_titles = [axe.title for axe in fig.list_axes]
+    pfig = make_subplots(
+        rows=fig.grid_spec.nrows, cols=fig.grid_spec.ncols, specs=specs, subplot_titles=axes_titles
+    )
     pfig.update_layout(title_text=fig.title)
 
-    for axe in fig.list_axes:
+    for i, axe in enumerate(fig.list_axes):
         (start_r, stop_r), (start_c, stop_c) = get_axe_coord(axe)
         for plottable in axe.list_plottables:
             (
@@ -97,7 +100,12 @@ def simple_plotly_renderer(fig: BFigure) -> go.Figure:
                 unit_of_y_var,
             ) = plottable._make_mline(axe)
 
-            pfig.add_trace(go.Scatter(x=xd, y=yd, name=axe.title), row=start_r + 1, col=start_c + 1)
+            pfig.add_trace(
+                go.Scatter(x=xd, y=yd, name=plottable.name), row=start_r + 1, col=start_c + 1
+            )
+
+        pfig["layout"][f"xaxis{i+1}"]["title"] = f"Label X axis {i+1}"
+        pfig["layout"][f"yaxis{i+1}"]["title"] = f"Label X axis {i+1}"
 
     pfig.show()
 
