@@ -24,6 +24,9 @@ dependencies = [
     "numpy>=1.21,<2.0",
     "plotly<6.0,>=5.13",
     "rich>=13.3,<14.0",
+    "cartopy~=0.21.0",
+    "pandas~=1.4.0",
+    "networkx~=2.8",
 ]
 requires-python = ">=3.8,<3.11"
 

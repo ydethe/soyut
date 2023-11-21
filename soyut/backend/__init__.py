@@ -1,0 +1,3 @@
+"""Actual rendering of figures
+
+"""

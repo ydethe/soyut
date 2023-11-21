@@ -12,5 +12,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Added __init__.py ([0a742dc](https://github.com/ydethe/soyut/commit/0a742dca537fa993e95b3636146d106042a49421) by Yann BLAUDIN DE THE).
 - Added rich dependency ([827d8d2](https://github.com/ydethe/soyut/commit/827d8d2ffe28e4691b5e68ec4fc99492a45293d2) by Yann BLAUDIN DE THE).
 
