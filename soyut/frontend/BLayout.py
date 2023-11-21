@@ -1,11 +1,11 @@
-from typing import TYPE_CHECKING
+import typing as T
 
-if TYPE_CHECKING:
+if T.TYPE_CHECKING:
     from .BLayout import BGridSpec
-    from .BFigure import ABFigure
+    from .BFigure import BFigure
 else:
     BGridSpec = "soyut.frontend.BLayout.BGridSpec"
-    ABFigure = "soyut.frontend.BFigure.ABFigure"
+    BFigure = "soyut.frontend.BFigure.BFigure"
 
 
 class BGridElement(object):
@@ -22,7 +22,7 @@ class BGridElement(object):
     def __init__(self, gs: BGridSpec, coord: slice):
         self.axe = None
         self.gs = gs
-        self.coord = coord
+        self.coord: T.Tuple[slice, slice] = coord
 
     def get_gridspec(self) -> BGridSpec:
         """Returns the BGridSpec associated with the BGridElement
@@ -33,7 +33,7 @@ class BGridElement(object):
         """
         return self.gs
 
-    def getFigure(self) -> ABFigure:
+    def getFigure(self) -> BFigure:
         return self.gs.figure
 
 
@@ -42,17 +42,17 @@ class BGridSpec(object):
 
     Args:
         figure: Refering BFigure
-        nrow: Number of rows of the layout
-        ncol: Number of columns of the layout
+        nrows: Number of rows of the layout
+        ncols: Number of columns of the layout
 
     """
 
-    __slots__ = ["figure", "nrow", "ncol"]
+    __slots__ = ["figure", "nrows", "ncols"]
 
-    def __init__(self, figure: ABFigure, nrow: int, ncol: int):
-        self.figure = figure
-        self.nrow = nrow
-        self.ncol = ncol
+    def __init__(self, figure: BFigure, nrows: int, ncols: int):
+        self.figure: BFigure = figure
+        self.nrows: int = nrows
+        self.ncols: int = ncols
 
     def __getitem__(self, ind) -> BGridElement:
         ge = BGridElement(gs=self, coord=ind)

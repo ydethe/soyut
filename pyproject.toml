@@ -22,11 +22,12 @@ classifiers = [
 ]
 dependencies = [
     "numpy>=1.21,<2.0",
-    "plotly<6.0,>=5.13",
+    "plotly>=5.18.0",
     "rich>=13.3,<14.0",
     "cartopy~=0.21.0",
     "pandas~=1.4.0",
     "networkx~=2.8",
+    "matplotlib>=3.7.4",
 ]
 requires-python = ">=3.8,<3.11"
 
@@ -115,9 +116,9 @@ test = [
 site_packages = true
 doc.shell = """\
     mkdir -p htmldoc/soyut
-    pdoc --html --force --config latex_math=True --template-dir docs/template -o htmldoc soyut
+    pdoc --html --force --config latex_math=True -o htmldoc soyut
     coverage html -d htmldoc/coverage --rcfile tests/coverage.conf
-    docstr-coverage soyut -miP -sp -is -idel --skip-file-doc --exclude ".*/kt.*.py" --badge=htmldoc/soyut/doc_badge.svg
+    docstr-coverage soyut -miP -sp -is -idel --skip-file-doc --badge=htmldoc/soyut/doc_badge.svg
     coverage-badge -f -o htmldoc/soyut/cov_badge.svg
 """
 baseline.shell = "pytest --mpl-generate-path=tests/baseline tests"

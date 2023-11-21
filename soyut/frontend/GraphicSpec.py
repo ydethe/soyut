@@ -116,8 +116,8 @@ class FigureSpec(object):
         props: A dictionary. Supported key:
 
         * title: figure title
-        * nrow: number of rows in the BFigure layout
-        * ncol: number of columns in the BFigure layout
+        * nrows: number of rows in the BFigure layout
+        * ncols: number of columns in the BFigure layout
         axes: List of soyut.frontend.GraphicSpec to specify the axes' spec
 
     Examples:
@@ -177,8 +177,8 @@ class FigureSpec(object):
 
         aSpec = AxeSpec(
             props={
-                "nrow": 1,
-                "ncol": 1,
+                "nrows": 1,
+                "ncols": 1,
                 "ind": 1,
                 "title": "Axe",
                 "projection": "rectilinear",

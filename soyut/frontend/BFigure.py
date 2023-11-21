@@ -14,8 +14,8 @@ class BFigure(object):
         self.grid_spec = None
         self.list_axes: T.List[ABaxe] = []
 
-    def add_gridspec(self, nrow: int = 1, ncol: int = 1) -> BGridSpec:
-        gs = BGridSpec(self, nrow=nrow, ncol=ncol)
+    def add_gridspec(self, nrows: int = 1, ncols: int = 1) -> BGridSpec:
+        gs = BGridSpec(self, nrows=nrows, ncols=ncols)
         self.grid_spec = gs
         return gs
 

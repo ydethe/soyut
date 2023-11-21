@@ -14,10 +14,10 @@ from .Plottable import (
 )
 
 if T.TYPE_CHECKING:
-    from .BFigure import ABFigure
+    from .BFigure import BFigure
     from .GraphicSpec import FigureSpec
 else:
-    ABFigure = "soyut.frontend.BFigure.ABFigure"
+    BFigure = "soyut.frontend.BFigure.BFigure"
     FigureSpec = "soyut.frontend.GraphicSpec.FigureSpec"
 
 
@@ -49,14 +49,14 @@ class ABaxe(metaclass=ABCMeta):
 
     def __init__(
         self,
-        figure: ABFigure,
+        figure: BFigure,
         title: str,
         spec: BGridElement,
         sharex: "ABaxe" = None,
         sharey: "ABaxe" = None,
         kwargs={},
     ):
-        self.figure: ABFigure = figure
+        self.figure: BFigure = figure
         self.title: str = title
         self.spec: BGridElement = spec
         self.parent_sharex: "ABaxe" = sharex
@@ -77,7 +77,7 @@ class ABaxe(metaclass=ABCMeta):
             self.ybounds = sharey.xbounds
             sharey._addChildSharey(self)
 
-        self.list_plottables = []
+        self.list_plottables: T.List[APlottable] = []
 
     @abstractproperty
     def projection(self) -> AxeProjection:
@@ -324,7 +324,7 @@ class BAxeFactory(object):
     @classmethod
     def create(
         cls,
-        figure: ABFigure,
+        figure: BFigure,
         title: str,
         spec: BGridElement,
         projection: AxeProjection,

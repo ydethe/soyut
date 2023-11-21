@@ -43,23 +43,23 @@ class APlottable(metaclass=ABCMeta):
         * unit
 
     Args:
-        plottable: one of the instance above
+        data_source: one of the instance above
         kwargs: The dictionary of options for plotting (color, width,etc)
 
     """
 
-    __slots__ = ["name", "plottable", "kwargs", "twinx", "twiny"]
+    __slots__ = ["name", "data_source", "kwargs", "twinx", "twiny"]
 
-    def __init__(self, plottable, name: str, kwargs: dict) -> None:
+    def __init__(self, data_source, name: str, kwargs: dict) -> None:
         self.name = name
-        self.plottable = plottable
+        self.data_source = data_source
         self.twinx = kwargs.pop("twinx", None)
         self.twiny = kwargs.pop("twiny", None)
         self.kwargs = kwargs
 
     @abstractmethod
     def _make_mline(self, axe: ABaxe) -> T.Tuple[FloatArr, FloatArr, str, str, str, str]:
-        """This makes the job of turning a generic plottable into a tuple of useful values
+        """This makes the job of turning a generic data_source into a tuple of useful values
 
         Returns:
             An numpy array of X coordinates
@@ -84,7 +84,7 @@ class PlottableGraph(APlottable):
     see https://networkx.org/documentation/stable/reference/generated/networkx.drawing.nx_pylab.draw_networkx.html
 
     Args:
-        plottable: a networkx MultiDiGraph instance
+        data_source: a networkx MultiDiGraph instance
         kwargs: The dictionary of options for plotting (color, width,etc)
 
     """
@@ -122,7 +122,7 @@ class PlottableGeneric(APlottable):
             unit_of_x_var,
             name_of_y_var,
             unit_of_y_var,
-        ) = self.plottable.make_line(transform=transform)
+        ) = self.data_source.make_line(transform=transform)
 
         if axe.projection == AxeProjection.PLATECARREE:
             xd *= 180 / pi
@@ -137,7 +137,7 @@ class APlottableDSPMap(APlottable):
     """Specialisation of `APlottable` for `blocksim.dsp.DSPMap.ADSPMap`
 
     Args:
-        plottable: a `blocksim.dsp.DSPMap.ADSPMap` instance
+        data_source: a `blocksim.dsp.DSPMap.ADSPMap` instance
         kwargs: The dictionary of options for plotting (color, width,etc)
 
     """
@@ -149,7 +149,7 @@ class PlottableImage(APlottableDSPMap):
     """Specialisation of `APlottable` for plotting images
 
     Args:
-        plottable: a Path instance
+        data_source: a Path instance
         kwargs: The dictionary of options for plotting
 
     """
@@ -190,7 +190,7 @@ class PlottableFactory(object):
                 * name
                 * unit
 
-            name: Name of the plottable for identification
+            name: Name of the data_source for identification
             kwargs: The plotting options for the object
 
         Returns:
