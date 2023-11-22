@@ -4,6 +4,7 @@ import numpy as np
 from matplotlib.figure import Figure as MFigure
 import plotly.graph_objects as go
 
+from soyut.utils import getUnitAbbrev
 from soyut.frontend.BAxe import ABaxe
 from soyut.frontend.BFigure import BFigure
 from soyut.frontend.BLayout import BGridSpec
@@ -32,9 +33,15 @@ def simple_mpl_renderer(fig: BFigure) -> MFigure:
                 unit_of_y_var,
             ) = plottable._make_mline(axe)
 
-            maxe.plot(xd, yd)
-            maxe.set_xlabel(f"{name_of_x_var} ({unit_of_x_var})")
-            maxe.set_ylabel(f"{name_of_y_var} ({unit_of_y_var})")
+            _, xmult, xlbl, xunit = getUnitAbbrev(np.max(np.abs(xd)), unit_of_x_var)
+            _, ymult, ylbl, yunit = getUnitAbbrev(np.max(np.abs(yd)), unit_of_y_var)
+            xlabel = f"{name_of_x_var}\u00A0({xlbl}{xunit})"
+            ylabel = f"{name_of_y_var}\u00A0({ylbl}{yunit})"
+
+            maxe.plot(xd / xmult, yd / ymult)
+
+            maxe.set_xlabel(xlabel)
+            maxe.set_ylabel(ylabel)
 
     plt.show()
 
@@ -100,19 +107,26 @@ def simple_plotly_renderer(fig: BFigure) -> go.Figure:
                 unit_of_y_var,
             ) = plottable._make_mline(axe)
 
+            _, xmult, xlbl, xunit = getUnitAbbrev(np.max(np.abs(xd)), unit_of_x_var)
+            _, ymult, ylbl, yunit = getUnitAbbrev(np.max(np.abs(yd)), unit_of_y_var)
+            xlabel = f"{name_of_x_var}\u00A0({xlbl}{xunit})"
+            ylabel = f"{name_of_y_var}\u00A0({ylbl}{yunit})"
+
             pfig.add_trace(
-                go.Scatter(x=xd, y=yd, name=plottable.name), row=start_r + 1, col=start_c + 1
+                go.Scatter(x=xd / xmult, y=yd / ymult, name=plottable.name),
+                row=start_r + 1,
+                col=start_c + 1,
             )
 
-        pfig["layout"][f"xaxis{i+1}"]["title"] = f"Label X axis {i+1}"
-        pfig["layout"][f"yaxis{i+1}"]["title"] = f"Label X axis {i+1}"
+        pfig["layout"][f"xaxis{i+1}"]["title"] = xlabel
+        pfig["layout"][f"yaxis{i+1}"]["title"] = ylabel
 
     pfig.show()
 
 
 def test_generic_plot():
     x = np.array([1, 2])
-    y = np.array([1, 2])
+    y = np.array([1, 2]) * 1e-6
 
     fig = BFigure("Titre figure")
     gs = fig.add_gridspec(nrows=5, ncols=2)
