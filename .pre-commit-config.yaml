@@ -1,9 +1,11 @@
 repos:
 - hooks:
   - id: check-changelog
-    args: [--version-regex, '<a href="[^"]+">(?P<version>[^<]+)', --bump-latest]
-  repo: https://gitlab.com/ydethe/pdm-copier.git
-  rev: v0.5.0
+    args: [--version-regex, '<a href="[^"]+">(?P<version>[^<]+)', --bump=auto, -t, keepachangelog]
+  - id: extract-todo
+    args: [--ignore, src/cpp/**/*]
+  repo: https://github.com/ydethe/pdm_template.git
+  rev: v0.1.8
 
 - hooks:
   - entry: found Copier update rejection files; review them and remove them

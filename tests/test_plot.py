@@ -149,8 +149,8 @@ def test_generic_plot():
     axe = fig.add_axe("Titre axe 6", spec=gs[4, 1])
     axe.plot((x, y))
 
-    # mfig = simple_mpl_renderer(fig)
-    mfig = simple_plotly_renderer(fig)
+    mfig = simple_mpl_renderer(fig)
+    # mfig = simple_plotly_renderer(fig)
 
     return mfig
 
